@@ -10,7 +10,8 @@ const {
   ConfigurationServiceClientCredentialFactory,
   ConfigurationBotFrameworkAuthentication,
 } = require("botbuilder");
-const { TeamsBot } = require("./teamsBot");
+
+const TeamsBot = require("./teamsBot"); // No destructuring needed
 const config = require("./config");
 
 // Create adapter.
