@@ -1,6 +1,6 @@
 class CortexChat {
-    constructor(jwtGenerator, agentUrl, model, searchService, semanticModels) {
-        this.jwtGenerator = jwtGenerator;
+    constructor(jwt, agentUrl, model, searchService, semanticModels) {
+        this.jwt = jwt;
         this.agentUrl = agentUrl;
         this.model = model;
         this.searchService = searchService;
@@ -12,7 +12,7 @@ class CortexChat {
             'X-Snowflake-Authorization-Token-Type': 'KEYPAIR_JWT',
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': `Bearer ${this.jwtGenerator.getToken()}`
+            'Authorization': `Bearer ${this.jwt}`
         };
 
         const data = {
@@ -38,7 +38,7 @@ class CortexChat {
         try {
             const response = await fetch(this.agentUrl, { method: "POST", headers, body: JSON.stringify(data) });
             if (!response.ok) throw new Error(`Response status: ${response.status}`);
-            return await this._parseResponse(response); // <-- Ensure this function exists
+            return await this._parseResponse(response); 
         } catch (error) {
             console.error("Error fetching response:", error);
             return { text: "An error occurred." };
@@ -50,7 +50,7 @@ class CortexChat {
             'X-Snowflake-Authorization-Token-Type': 'KEYPAIR_JWT',
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': `Bearer ${this.jwtGenerator.getToken()}`
+            'Authorization': `Bearer ${this.jwt}`
         };
 
         const data = {

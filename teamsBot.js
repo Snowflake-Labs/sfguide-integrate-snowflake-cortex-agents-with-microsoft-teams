@@ -10,7 +10,7 @@ class TeamsBot extends TeamsActivityHandler {
         super();
 
         // Load environment variables and pass them to CortexChat
-        const jwtGenerator = new JWTGenerator();
+        const jwt = new JWTGenerator().getToken();
         const agentUrl = process.env.AGENT_ENDPOINT;
         const model = process.env.MODEL;
         const searchService = process.env.SEARCH_SERVICE;
@@ -19,7 +19,7 @@ class TeamsBot extends TeamsActivityHandler {
             process.env.SUPPLY_CHAIN_SEMANTIC_MODEL
         ];
 
-        this.cortexChat = new CortexChat(jwtGenerator, agentUrl, model, searchService, semanticModels);
+        this.cortexChat = new CortexChat(jwt, agentUrl, model, searchService, semanticModels);
 
         this.onMessage(async (context, next) => {
             const prompt = TurnContext.removeRecipientMention(context.activity).trim();
