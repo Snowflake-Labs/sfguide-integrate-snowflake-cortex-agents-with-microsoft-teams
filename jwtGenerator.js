@@ -14,7 +14,7 @@ class JWTGenerator {
         this.qualifiedUsername = `${this.account}.${this.user}`;
         this.lifetime = 180 * 60;
         this.renewalDelay = 180 * 60;
-        this.privateKey = fs.readFileSync(process.env.PRIVATE_KEY_PATH, "utf8");
+        this.privateKey = fs.readFileSync(process.env.RSA_PRIVATE_KEY_PATH, "utf8");
         this.renewTime = Date.now() / 1000;
         this.token = this.generateToken();
     }
