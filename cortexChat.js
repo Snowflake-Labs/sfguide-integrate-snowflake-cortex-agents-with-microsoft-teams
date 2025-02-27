@@ -38,44 +38,6 @@ class CortexChat {
         try {
             const response = await fetch(this.agentUrl, { method: "POST", headers, body: JSON.stringify(data) });
             if (!response.ok) throw new Error(`Response status: ${response.status}`);
-            return await this._parseResponse(response); 
-        } catch (error) {
-            console.error("Error fetching response:", error);
-            return { text: "An error occurred." };
-        }
-    }
-
-    async _retrieveResponse(query, limit = 1) {
-        const headers = {
-            'X-Snowflake-Authorization-Token-Type': 'KEYPAIR_JWT',
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': `Bearer ${this.jwt}`
-        };
-
-        const data = {
-            model: this.model,
-            messages: [{ role: "user", content: [{ type: "text", text: query }] }],
-            tools: [
-                { tool_spec: { type: "cortex_search", name: "vehicles_info_search" } },
-                { tool_spec: { type: "cortex_analyst_text_to_sql", name: "support" } },
-                { tool_spec: { type: "cortex_analyst_text_to_sql", name: "supply_chain" } }
-            ],
-            tool_resources: {
-                vehicles_info_search: {
-                    name: this.searchService,
-                    max_results: limit,
-                    title_column: "title",
-                    id_column: "relative_path"
-                },
-                support: { semantic_model_file: this.semanticModels[0] },
-                supply_chain: { semantic_model_file: this.semanticModels[1] }
-            }
-        };
-
-        try {
-            const response = await fetch(this.agentUrl, { method: "POST", headers, body: JSON.stringify(data) });
-            if (!response.ok) throw new Error(`Response status: ${response.status}`);
             return await this._parseResponse(response);
         } catch (error) {
             console.error("Error fetching response:", error);
