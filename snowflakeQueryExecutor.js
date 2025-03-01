@@ -11,7 +11,8 @@ class SnowflakeQueryExecutor {
         this.connection = snowflake.createConnection({
             account: process.env.ACCOUNT,
             username: process.env.DEMO_USER,
-            password: process.env.DEMO_USER_PASSWORD,
+            authenticator: "SNOWFLAKE_JWT",
+            privateKeyPath: process.env.RSA_PRIVATE_KEY_PATH,
             warehouse: process.env.WAREHOUSE,
             database: process.env.DEMO_DATABASE,
             schema: process.env.DEMO_SCHEMA
