@@ -1,5 +1,5 @@
 const snowflake = require('snowflake-sdk');
-const dfd = require('danfojs-node');
+var columnify = require('columnify');
 
 class SnowflakeQueryExecutor {
     constructor() {
@@ -38,7 +38,8 @@ class SnowflakeQueryExecutor {
     async runQuery(sql) {
         await this.connect();
         const results = await this.executeQuery(sql);
-        return new dfd.DataFrame(results);
+        console.table(results);
+        return columnify(results);
     }
 }
 

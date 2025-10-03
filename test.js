@@ -39,7 +39,7 @@ const curlCmd = `curl -X POST ${process.env.AGENT_ENDPOINT} \
   ],
   "tool_resources": {
     "vehicles_info_search": {
-      "name": "${process.env.VEHICLE_SEARCH_SERVICE}",
+      "name": "${process.env.SEARCH_SERVICE}",
       "max_results": 1,
       "title_column": "title",
       "id_column": "relative_path"

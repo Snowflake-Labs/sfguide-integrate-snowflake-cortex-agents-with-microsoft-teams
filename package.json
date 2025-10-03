@@ -24,7 +24,7 @@
         "express": "^5.0.1",
         "dotenv": "^16.3.1",
         "snowflake-sdk": "^2.0.2",
-        "danfojs-node": "^1.1.2"
+        "columnify": "^1.6.0"
     },
     "devDependencies": {
         "env-cmd": "^10.1.0",
